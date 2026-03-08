@@ -1,0 +1,61 @@
+@page "/register"
+@rendermode InteractiveServer
+
+@using Badania.Models
+@using Badania.Services
+@inject RegistrationService RegistrationService
+@inject NavigationManager NavigationManager
+
+<h3>Rejestracja na Kongres Kwiatowy</h3>
+
+<div class="row">
+    <div class="col-md-6">
+        <EditForm Model="@registration" OnValidSubmit="HandleValidSubmit" FormName="RegistrationForm">
+            <DataAnnotationsValidator />
+            <ValidationSummary />
+
+            <div class="mb-3">
+                <label for="firstName" class="form-label">Imię</label>
+                <InputText id="firstName" class="form-control" @bind-Value="registration.FirstName" />
+                <ValidationMessage For="@(() => registration.FirstName)" />
+            </div>
+
+            <div class="mb-3">
+                <label for="lastName" class="form-label">Nazwisko</label>
+                <InputText id="lastName" class="form-control" @bind-Value="registration.LastName" />
+                <ValidationMessage For="@(() => registration.LastName)" />
+            </div>
+
+            <div class="mb-3">
+                <label for="address" class="form-label">Adres</label>
+                <InputText id="address" class="form-control" @bind-Value="registration.Address" />
+                <ValidationMessage For="@(() => registration.Address)" />
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">Płeć</label>
+                <InputRadioGroup @bind-Value="registration.Gender">
+                    <div>
+                        <InputRadio Value="@("Kobieta")" id="genderWomen" /> <label for="genderWomen">Kobieta</label>
+                    </div>
+                    <div>
+                        <InputRadio Value="@("Mężczyzna")" id="genderMen" /> <label for="genderMen">Mężczyzna</label>
+                    </div>
+                </InputRadioGroup>
+                <ValidationMessage For="@(() => registration.Gender)" />
+            </div>
+
+            <button type="submit" class="btn btn-primary">Zarejestruj</button>
+        </EditForm>
+    </div>
+</div>
+
+@code {
+    private Registration registration = new Registration();
+
+    private async Task HandleValidSubmit()
+    {
+        await RegistrationService.AddRegistrationAsync(registration);
+        NavigationManager.NavigateTo("/registrations");
+    }
+}

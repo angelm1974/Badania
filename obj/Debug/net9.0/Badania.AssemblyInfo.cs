@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("Badania")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+1914b0e98518a366f5017fea17f6315c43fb8a3a")]
 [assembly: System.Reflection.AssemblyProductAttribute("Badania")]
 [assembly: System.Reflection.AssemblyTitleAttribute("Badania")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

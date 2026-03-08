@@ -1,0 +1,48 @@
+@page "/registrations"
+@using Badania.Models
+@using Badania.Services
+@inject RegistrationService RegistrationService
+
+<h3>Zarejestrowani Uczestnicy</h3>
+
+@if (registrations == null)
+{
+    <p><em>Ładowanie...</em></p>
+}
+else if (!registrations.Any())
+{
+    <p>Brak zarejestrowanych uczestników.</p>
+}
+else
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Imię</th>
+                <th>Nazwisko</th>
+                <th>Adres</th>
+                <th>Płeć</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var reg in registrations)
+            {
+                <tr>
+                    <td>@reg.FirstName</td>
+                    <td>@reg.LastName</td>
+                    <td>@reg.Address</td>
+                    <td>@reg.Gender</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+
+@code {
+    private List<Registration>? registrations;
+
+    protected override async Task OnInitializedAsync()
+    {
+        registrations = await RegistrationService.GetRegistrationsAsync();
+    }
+}
